@@ -274,7 +274,7 @@ The app will be available at:
      - Sends email using Django email backend.
    - `/accounts/verify-otp/` – user enters OTP.
    - `/accounts/reset-password/` – user sets new password.
-   - Final step calls `firebase_admin.auth.update_user` to update password in Firebase Auth.[web:24]
+   - Final step calls `firebase_admin.auth.update_user` to update password in Firebase Auth.
 
 ### Repositories & Files
 
@@ -318,7 +318,7 @@ All repository and file routes are protected with `@login_required(login_url='/a
 ```bash
 python manage.py collectstatic
 ```
-  - This collects all static files into `STATIC_ROOT = BASE_DIR / 'staticfiles'` for serving by a real web server.[web:35][web:36][web:40]
+  - This collects all static files into `STATIC_ROOT = BASE_DIR / 'staticfiles'` for serving by a real web server.
 
 ---
 
