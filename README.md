@@ -107,7 +107,16 @@ Codehub/ # Repo root (downloaded folder)
 │ │ ├─ views.py
 │ │ └─ migrations/
 │ │
-│ ├─ templates/ # All HTML templates
+│ ├─ shared/ # Shared utilities / cross‑app views
+│ │ ├─ views.py
+│ │ ├─ urls.py
+│ │ ├─ models.py
+│ │ ├─ admin.py
+│ │ ├─ apps.py
+│ │ ├─ tests.py
+│ │ └─ migrations/
+│ │
+│ ├─ templates/ # HTML templates
 │ │ ├─ base.html
 │ │ ├─ index.html
 │ │ ├─ login.html
@@ -146,33 +155,35 @@ Codehub/ # Repo root (downloaded folder)
 
 ---
 
-## Prerequisites
+## Technology stack
 
-- Python 3.11+ (matching your local setup).
-- SQLite (bundled with Python).
-- Firebase project (for Auth + Admin SDK).[web:24]
-- Gmail (or other SMTP provider) for password reset emails.[web:20]
+- **Backend:** Django 5.x, Python 3.11+ [file:52]  
+- **Auth:** Firebase Authentication (REST + Admin SDK) [file:54]  
+- **Database (dev):** SQLite (Django default), file `db.sqlite3` [file:52]  
+- **Frontend:** HTML templates + CSS/JS static assets  
+- **Email:** SMTP (Gmail) for password reset emails [file:52]
 
 ---
 
 ## Installation
 
 ### 1. Clone the repository
+These steps are for someone who wants to run their **own local copy**. End‑users only need the deployed URL.
 ```bash
-   git clone https://github.com/ronakshah22-lab/Codehub
+   git clone https://github.com/ronakshah22-lab/Codehub.git
    cd Codehub/codehub
 
 ### 2. Create and activate a virtual environment
 ```bash
-   python -m venv ../venv
+   python -m venv venv
 
 Windows:
 ```bash
-   ../venv/Scripts/activate
+   venv/Scripts/activate
 
 Linux/macOS:
 ```bash
-   source ../venv/bin/activate
+   source venv/bin/activate
 
 ### 3. Install dependencies
 ```bash
