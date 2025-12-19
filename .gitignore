@@ -1,0 +1,14 @@
+# Virtualenv
+venv/
+.env
+*.env
+
+# Firebase / service credentials
+firebase_credentials.json
+
+# Django artifacts
+db.sqlite3
+__pycache__/
+*.py[cod]
+
+staticfiles/

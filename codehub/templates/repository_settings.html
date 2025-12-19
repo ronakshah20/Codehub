@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Repository settings - {{ repo.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+	<div class="header-top">
+	    <h2 class="page-title">Repository settings</h2>
+	    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-secondary settings-back">
+		Back
+	    </a>
+	</div>
+
+	<article class="repo-card settings-card">
+	    <p><strong>Name:</strong> {{ repo.name }}</p>
+	    <p><strong>Owner:</strong> {{ repo.owner.username }}</p>
+	    <p><strong>Visibility:</strong> {{ repo.visibility }}</p>
+	    <p><strong>Description:</strong> {{ repo.description|default:"No description provided." }}</p>
+	    <div class="settings-actions">
+		<a href="{% url 'edit_repository' repo.owner.username repo.name %}" class="btn-primary btn-secondary">Edit repository</a>
+
+    		<form method="post" action="{% url 'delete_repository' repo.owner.username repo.name %}" class="inline-form">
+        	    {% csrf_token %}
+        	    <button type="submit" class="btn-primary btn-danger">Delete repository</button>
+    		</form>
+	    </div>
+	</article>
+    </main>
+</div>
+{% endblock %}

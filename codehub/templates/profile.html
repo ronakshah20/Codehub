@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/> {% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+        <div class="header-top">
+            <h2 class="page-title">Profile for {{ user.email }}</h2>
+        </div>
+
+        <div class="repo-cards"> <article class="repo-card">
+                <div class="repo-info">
+                    <h3 class="repo-title">Account Actions</h3>
+                    <p class="repo-desc">Manage your account settings and session.</p>
+                </div>
+                <div class="profile-actions">
+		  <a href="{% url 'forgot_password' %}" class="btn-primary btn-secondary">Reset Password</a>
+		  <a href="{% url 'logout' %}" class="btn-primary btn-danger">Logout</a>
+                 </div>
+            </article>
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Upload file - {{ repo.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+	<div class="header-top">
+	    <h2 class="page-title">Upload file to {{ repo.name }}</h2>
+	    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-secondary settings-back">
+		Back
+	    </a>
+	</div>
+	<article class="repo-card upload-repo-card">
+	    <form method="post" enctype="multipart/form-data" class="upload-form">
+        	{% csrf_token %}
+		<div class="form-row">
+		    <label for="file">Choose a text file</label>
+		    <input type="file" id="file" name="file" required>
+		</div>
+		<div class="edit-actions">
+		    <button type="submit" class="btn-primary edit-save">Upload</button>
+		</div>
+	    </form>
+	</article>
+    </main>
+</div>
+{% endblock %}

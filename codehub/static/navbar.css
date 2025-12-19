@@ -1,0 +1,137 @@
+.navbar {
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2.5rem;
+  background: rgba(25, 32, 53, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(56, 63, 74, 0.4);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* Enhanced blur effect on scroll */
+.navbar.scrolled {
+  background: rgba(25, 32, 53, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(56, 63, 74, 0.6);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: opacity 0.3s;
+}
+
+.nav-logo-link:hover {
+  opacity: 0.9;
+}
+
+.nav-logo {
+  margin-right: 0.5rem;
+}
+
+.nav-logo-link svg {
+  vertical-align: middle;
+}
+
+.nav-title {
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #bfc4ca;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2563eb;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- OVERRIDE: Navbar buttons (smaller, narrower, no shadow) --- */
+/* This block ensures the buttons in the navbar stay compact on the root page. */
+.hero-buttons .btn-primary {
+  width: auto;
+  padding: 0.65rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: none;
+  gap: 0.5rem;
+  transform: none;
+  transition: background var(--transition);
+}
+
+.hero-buttons .btn-primary:hover {
+  transform: none;
+  background: #1d4ed8;
+}
+
+.hero-buttons .btn-secondary {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.65rem 1.25rem;
+  transition: color 0.3s;
+  font-size: 1rem;
+}
+
+.hero-buttons .btn-secondary:hover {
+  transform: none;
+  background: #1d4ed8;
+}
+
+.profile-icon .material-symbols-outlined {
+    font-size: 2rem;
+    color: var(--white);
+    transition: color 0.3s;
+}
+
+.profile-icon:hover .material-symbols-outlined {
+    color: var(--primary);
+}

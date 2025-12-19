@@ -1,0 +1,220 @@
+/* Removed global styles and variables (Now in global.css) */
+
+/* ===== Animated Background (Kept the animation setup) ===== */
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background::before,
+.background::after {
+  content: '';
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  animation: flow 22s linear infinite;
+}
+
+.background::before {
+  background: radial-gradient(circle at 45% 30%, #2563eb80 0%, transparent 70%);
+}
+
+.background::after {
+  background: radial-gradient(circle at 70% 65%, #1d4ed850 0%, transparent 70%);
+  animation-delay: -11s;
+}
+
+@keyframes flow {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/* END Animated Background */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  z-index: 10;
+  position: relative;
+}
+
+.main {
+  max-width: 700px;
+  margin: 4rem auto 2rem;
+  padding: 0 1rem;
+}
+
+.form-container {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  border: 1px solid #2c354c;
+}
+
+.form-header {
+  border-bottom: 1px solid #2c354c;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-header h1 {
+  font-size: 1.75rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.form-header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  background: #1c2233;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* Visibility Group (Radio buttons) */
+.visibility-group {
+  margin-bottom: 2rem;
+}
+
+.visibility-group > label {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Radio Card styles */
+.radio-option {
+  margin-bottom: 1rem;
+}
+
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radio-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: #161d29; /* Card background color */
+  border: 1px solid #2c354c;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.radio-option input[type="radio"]:checked + .radio-card {
+  border-color: #1f6feb; /* Primary color variant */
+  background: #192231;
+}
+
+.radio-card:hover {
+  border-color: #3f4a5c;
+}
+
+.radio-indicator {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #3f4a5c;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radio-option input[type="radio"]:checked + .radio-card .radio-indicator {
+  border-color: #1f6feb;
+  background: #1f6feb;
+}
+
+.radio-option input[type="radio"]:checked + .radio-card .radio-indicator::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+}
+
+.radio-option:focus-within .radio-card {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.35);
+  border-color: var(--primary);
+}
+
+.radio-content {
+  flex: 1;
+}
+
+.radio-content strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 4px;
+}
+
+.radio-content p {
+  font-size: 12px;
+  color: #8b949e;
+  line-height: 1.4;
+}
+
+.form-actions {
+  padding-top: 1.5rem;
+  border-top: 1px solid #2c354c;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit repository - {{ repo.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+	<div class="header-top">
+	    <h2 class="page-title">Edit repository</h2>
+	    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-secondary settings-back">
+		Back
+	    </a>
+	</div>
+	<article class="repo-card edit-repo-card">
+	    <form method="post" class="edit-repo-form">
+	        {% csrf_token %}
+        	<div class="form-row">
+		    <label for="name">Name</label>
+		    <input type="text" id="name" name="name" value="{{ repo.name }}" required>
+		</div>
+		<div class="form-row">
+		    <label for="description">Description</label>
+		    <input id="description" name="description" type="text" value="{{ repo.description|default:'' }}">
+		</div>
+		<div class="form-row">
+		    <label for="visibility">Visibility</label>
+		    <select id="visibility" name="visibility">
+			<option value="public" {% if repo.visibility == "public" %}selected{% endif %}>Public</option>
+			<option value="private" {% if repo.visibility == "private" %}selected{% endif %}>Private</option>
+		    </select>
+		</div>
+
+		<div class="edit-actions">
+		    <button type="submit" class="btn-primary edit-save">Save changes</button>
+		</div>
+	    </form>
+	</article>
+    </main>
+</div>
+{% endblock %}

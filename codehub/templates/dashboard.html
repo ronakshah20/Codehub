@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CodeHub - Dashboard{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+        <div class="header-top">
+            <h2 class="page-title">Repositories</h2>
+            <a href="{% url 'create_repo' %}" class="btn-create">
+                <span class="material-symbols-outlined">add</span>
+                <span>Create New Repository</span>
+            </a>
+        </div>
+
+        <section class="repo-section">
+            <h2 class="section-title">My repositories</h2>
+	    {% if user_repos %}
+    		<div class="repo-cards">
+		    {% for repo in user_repos %}        	    
+			<div class="repo-card">
+			    <h3>
+	                	{{ repo.owner.first_name|default:repo.owner.username }} / {{ repo.name }}
+			    </h3>
+            		    <p>{{ repo.description|default:"No description provided." }}</p>
+            		    <div class="repo-meta">
+				<span class="repo-status {% if repo.visibility == 'public' %}public{% else %}private{% endif %}">
+				    <span class="material-symbols-outlined">
+					{% if repo.visibility == 'public' %}public{% else %}lock{% endif %}
+				    </span>
+				    <span>{% if repo.visibility == 'public' %}Public{% else %}Private{% endif %}
+				    </span>
+				</span>
+				<span class="last-updated">
+			    	    Last updated: {{ repo.updated_at|timesince }} ago
+				</span>
+            		    </div>
+            		    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-open">Open</a>
+        	    	</div>
+    		    {% endfor %}
+		</div>
+	    {% else %}
+    		<p>You don't have any repositories yet.</p>
+	    {% endif %}
+	</section>
+	<section class="repo-section">
+	    <h2 class="section-title">Public repositories</h2>
+	    {% if other_public_repos %}
+		<div class="repo-cards">
+		    {% for repo in other_public_repos %}
+        		<div class="repo-card">
+            		    <h3>
+                		{{ repo.owner.first_name|default:repo.owner.username }} / {{ repo.name }}
+            		    </h3>
+            		    <p>{{ repo.description|default:"No description provided." }}</p>
+            		    <div class="repo-meta">
+				<span class="repo-status public">
+				    <span class="material-symbols-outlined">public</span>
+				    <span>Public</span>
+				</span>
+				<span class="last-updated">
+			    	    Last updated: {{ repo.updated_at|timesince }} ago
+				</span>
+            		    </div>
+            		    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-open">Open</a>
+        		</div>
+		    {% endfor %}
+		</div>
+	    {% else %}
+    		<p>No public repositories from other users yet.</p>
+	    {% endif %}
+        </section>
+    </main>
+</div>
+{% endblock %}

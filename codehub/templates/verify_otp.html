@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CodeHub - Verify Your Code{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'auth.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2>Check your email</h2>
+    <p class="auth-subtitle">
+        We sent a 6-digit code to
+        <strong>{{ email|default:"your email" }}</strong>.
+        Enter it below to continue.
+    </p>
+
+    <div id="feedback-message" style="display:none; margin-bottom: 1rem;"></div>
+
+    <form id="verify-otp-form" method="POST">
+        {% csrf_token %}
+        
+        <input type="text" id="otp-code" name="otp" placeholder="Enter 6-digit code" class="form-input" required
+               inputmode="numeric" pattern="[0-9]{6}" maxlength="6">
+        
+        <button type="submit" id="verify-btn" class="btn-primary">
+            Verify Code
+        </button>
+    </form>
+    
+    <p class="auth-prompt">
+        Didn't get a code?
+        <a href="{% url 'forgot_password' %}">Request a new one</a>
+    </p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('verify-otp-form');
+    const otpInput = document.getElementById('otp-code');
+    const verifyButton = document.getElementById('verify-btn');
+    const feedbackMessage = document.getElementById('feedback-message');
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); // Stop the form from submitting normally
+        
+        verifyButton.disabled = true;
+        verifyButton.textContent = 'Verifying...';
+        feedbackMessage.style.display = 'none';
+
+        fetch("{% url 'check_otp' %}", { // This is our API URL from File 1
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-CSRFToken': csrfToken
+            },
+            body: `otp=${encodeURIComponent(otpInput.value)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Success! Redirect to the URL our server sent
+                window.location.href = data.redirect_url;
+            } else {
+                // Show the error message from the server
+                feedbackMessage.textContent = data.message;
+                feedbackMessage.style.color = '#ff5252'; // Red color for error
+                feedbackMessage.style.display = 'block';
+                verifyButton.disabled = false;
+                verifyButton.textContent = 'Verify Code';
+                otpInput.value = ''; // Clear the wrong OTP
+            }
+        })
+        .catch(error => {
+            feedbackMessage.textContent = 'A network error occurred. Please try again.';
+            feedbackMessage.style.color = '#ff5252';
+            feedbackMessage.style.display = 'block';
+            verifyButton.disabled = false;
+            verifyButton.textContent = 'Verify Code';
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,154 @@
+/* static/global.css */
+
+/* --- Font Imports (Consolidated from all pages) --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+/* --- Unified Global CSS Variables (:root) --- */
+:root {
+  /* Core Colors */
+  --primary: #2563eb;
+  --secondary: #23272f; 
+  --main-bg: #151a23; /* Darkest background, common on auth pages */
+  --card-bg: #192035;
+  --input-bg: #161d29;
+  --input-border: #2c354c;
+  --white: #fff;
+  --muted: #bfc4ca;
+  --text: var(--white);
+  --text-light: var(--white);
+  --text-muted: var(--muted);
+
+  /* Global Properties */
+  --transition: 0.22s cubic-bezier(.68,-0.11,.37,1.15);
+  --font-family: 'Inter', 'Noto Sans', sans-serif;
+  --card-radius: 1rem; 
+  --shadow: 0 4px 24px rgba(0,0,0,0.18); 
+  
+  /* Aliases for dashboard compatibility */
+  --primary-color: var(--primary); 
+  --bg-color: var(--main-bg); 
+  --border-color: #383f4a; 
+}
+
+/* --- Global Reset and Base Styles --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  background-color: var(--main-bg); 
+  color: var(--white);
+  position: relative;
+  line-height: 1.5;
+  overflow-x: hidden; 
+}
+
+/* Style for the global ripple effect element (used by scripts.js) */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.3); 
+  pointer-events: none;
+  animation: ripple-effect 0.7s linear;
+  z-index: 1; 
+}
+
+@keyframes ripple-effect {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+  }
+  to {
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+  }
+}
+
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.animated-bg::before,
+.animated-bg::after {
+  content: '';
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  border-radius: 50%;
+  animation: flow 22s linear infinite;
+}
+
+.animated-bg::before {
+  background: radial-gradient(circle at 45% 30%, #2563eb80 0%, transparent 70%);
+}
+
+.animated-bg::after {
+  background: radial-gradient(circle at 70% 65%, #1d4ed850 0%, transparent 70%);
+  animation-delay: -11s;
+}
+
+@keyframes flow {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/* END Animated Background */
+
+/* --- 🔑 MASTER .btn-primary style for all elements (Forms will inherit and override width) --- */
+/* This style block gives the buttons on the Login/Register/Create pages their full-width, large look. */
+.btn-primary {
+  background: var(--primary); 
+  color: var(--white);
+  font-weight: 600;
+  font-size: 1.13rem;
+  padding: 0.70em 1.5rem;
+  
+  border: none;
+  border-radius: 9px; 
+  box-shadow: 0 2px 14px rgba(37,99,235,0.13);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition), transform 0.16s;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%; /* Default width for form buttons */
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: scale(1.026);
+}
+
+/* --- BUTTON COLOR UTILITIES --- */
+.btn-secondary {
+  background-color: #313843;
+}
+.btn-secondary:hover {
+  background-color: #434a56;
+}
+
+.btn-danger {
+  background-color: #c82333;
+}
+.btn-danger:hover {
+  background-color: #dc3545;
+}

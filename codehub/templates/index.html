@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your Hub for Code & Collaboration{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'index.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Your Hub for Code & Collaboration</h1>
+    <p class="subtitle">
+        A web application with GitHub-like functionalities for repository management.
+    </p>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="32" height="32" fill="#2563eb" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="24" height="16" rx="3"/><path d="M4 8l6-4h12l6 4"/></svg>
+        </div>
+        <h2>Effortless Repository Management</h2>
+        <p>Easily create, manage, and collaborate on your code repositories.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="32" height="32" fill="#2563eb" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="14" width="16" height="14" rx="4"/><rect x="12" y="6" width="8" height="10" rx="4"/></svg>
+        </div>
+        <h2>Secure Private Repositories</h2>
+        <p>Keep your code safe and secure with our private repository options.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="32" height="32" fill="#2563eb" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="8" width="24" height="16" rx="3"/><path d="M4 8l6-4h12l6 4"/></svg>
+        </div>
+        <h2>Integrated Python Code Editor</h2>
+        <p>Write, test, and run your Python code directly in your browser.</p>
+    </div>
+</section>
+{% endblock %}

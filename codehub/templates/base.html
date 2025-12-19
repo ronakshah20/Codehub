@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{% block title %}CodeHub{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'global.css' %}"/> 
+    
+    <link rel="stylesheet" href="{% static 'navbar.css' %}"/>
+
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <header class="navbar">
+      <div class="nav-left">
+        <a href="{% url 'index' %}" class="nav-logo-link">
+          <span class="nav-logo">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="#2563eb">
+              <rect x="4" y="7" width="20" height="14" rx="4"/>
+            </svg>
+          </span>
+          <span class="nav-title">CodeHub</span>
+        </a>
+      </div>
+
+      <nav class="nav-links">
+        {% if user.is_authenticated %}
+          <a href="{% url 'dashboard' %}">My Repositories</a>
+          <a href="{% url 'python_env' %}">Code Environment</a>
+        {% endif %}
+      </nav>
+
+      <div class="hero-buttons">
+        {% if user.is_authenticated %}
+        
+          <a href="{% url 'profile' %}" class="profile-icon">
+            <span class="material-symbols-outlined">account_circle</span>
+          </a>
+    
+        {% else %}
+        
+          {% url 'register' as register_path %}
+          {% url 'login' as login_path %}
+          {% url 'forgot_password' as forgot_password_path %}
+
+          {% if request.path == register_path %}
+            
+            <a href="{% url 'login' %}" class="btn-primary btn-secondary">Login</a>
+        
+          {% elif request.path == login_path or request.path == forgot_password_path %}
+            
+            <a href="{% url 'register' %}" class="btn-primary">Sign Up</a>
+        
+          {% else %}
+            
+            <a href="{% url 'register' %}" class="btn-primary">Get Started</a>
+            <a href="{% url 'login' %}" class="btn-primary btn-secondary">Login</a>
+        
+          {% endif %}
+        {% endif %}
+      </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    {% block scripts %}
+    <script src="{% static 'scripts.js' %}"></script>
+    {% endblock %}
+</body>
+</html>

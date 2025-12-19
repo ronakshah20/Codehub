@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Create new file - {{ repo.name }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+    
+    <style>
+        .file-editor-card {
+            background: var(--card-bg);
+            border-radius: var(--card-radius, 8px);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .file-editor-form .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .file-editor-form label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Re-using styles similar to your auth forms for consistency */
+        .form-input, .form-textarea {
+            background: var(--input-bg, #111418);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-light, #eee);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: border 0.2s;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            box-sizing: border-box; /* Ensures padding doesn't break width */
+        }
+        
+        .form-textarea {
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 300px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary, #2563eb);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .error-message {
+            color: #ff5252;
+            background-color: #3f1e1e;
+            border: 1px solid #ff525250;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+        
+        <div class="header-top">
+            <h2 class="page-title">
+                <a href="{% url 'repository_detail' repo.owner.username repo.name %}" style="color: var(--primary); text-decoration: none;">
+                    {{ repo.owner.first_name|default:repo.owner.username }} / <strong>{{ repo.name }}</strong>
+                </a>
+                / Create new file
+            </h2>
+        </div>
+
+        <div class="file-editor-card">
+            <form class="file-editor-form" method="POST">
+                {% csrf_token %}
+
+                {% if error %}
+                    <div class="error-message">{{ error }}</div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="file_path">File Name</label>
+                    <input type="text" id="file_path" name="file_path" class="form-input" 
+                           placeholder="e.g., README.md or app/main.py" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">File Content</label>
+                    <textarea id="content" name="content" class="form-textarea" 
+                              placeholder="Add your code here..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save file</button>
+                    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </main>
+</div>
+{% endblock %}

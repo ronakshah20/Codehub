@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CodeHub - Login{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'auth.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2>Sign in to CodeHub</h2>
+    <p class="subtitle">Enter your details to access your dashboard</p>
+
+    {% if error %}
+    <p class="error-message">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{% url 'login' %}" autocomplete="off">
+        {% csrf_token %}
+        <input type="text" name="email" class="form-input" placeholder="Email" required>
+        <input type="password" name="password" class="form-input" placeholder="Password" required>
+	<div class="forgot-password-link">
+            <a href="{% url 'forgot_password' %}">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+    </form>
+    <p class="new-user">
+        New to CodeHub?
+        <a href="{% url 'register' %}" class="link">Create an account</a>
+    </p>
+</div>
+{% endblock %}

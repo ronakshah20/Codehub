@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit file - {{ file_to_edit.file_path }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+    <style>
+        .file-editor-card {
+            background: var(--card-bg);
+            border-radius: var(--card-radius, 8px);
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .file-editor-form .form-group {
+            margin-bottom: 1rem;
+        }
+        .file-editor-form label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .form-input, .form-textarea {
+            background: var(--input-bg, #111418);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-light, #eee);
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: border 0.2s;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            box-sizing: border-box; 
+        }
+        /* Style for a disabled input */
+        .form-input:disabled {
+            background: #22272e;
+            color: #a2a6b0;
+            cursor: not-allowed;
+        }
+        .form-textarea {
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 300px;
+            resize: vertical;
+        }
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--primary, #2563eb);
+        }
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <main class="main-content">
+        
+        <div class="header-top">
+            <h2 class="page-title">
+                <a href="{% url 'repository_detail' repo.owner.username repo.name %}" style="color: var(--primary); text-decoration: none;">
+                    {{ repo.owner.first_name|default:repo.owner.username }} / <strong>{{ repo.name }}</strong>
+                </a>
+            </h2>
+        </div>
+
+        <div class="file-editor-card">
+            <form class="file-editor-form" method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="file_path">File Name</label>
+                    <input type="text" id="file_path" name="file_path" class="form-input" 
+                           value="{{ file_to_edit.file_path }}" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="content">File Content</label>
+                    <textarea id="content" name="content" class="form-textarea" 
+                              placeholder="Add your code here...">{{ file_to_edit.content }}</textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save changes</button>
+                    <a href="{% url 'repository_detail' repo.owner.username repo.name %}" class="btn-primary btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+    </main>
+</div>
+{% endblock %}

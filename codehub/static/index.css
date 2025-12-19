@@ -1,0 +1,92 @@
+/* Removed global styles and variables (Now in global.css) */
+
+.hero {
+  max-width: 900px;
+  margin: 7rem auto 5rem;
+  padding: 0 1.5rem;
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff, #bfc4ca);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero .subtitle {
+  font-size: 1.35rem;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Feature Cards Section */
+.features {
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.feature-card {
+  background: var(--card-bg); 
+  color: var(--text);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  width: 320px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.2rem 1.5rem 1.2rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  border: 2px solid transparent;
+}
+
+.feature-card:hover {
+  transform: translateY(-7px) scale(1.04);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.13);
+  border: 2px solid var(--primary);
+}
+
+.feature-icon {
+  margin-bottom: 1rem;
+}
+
+.feature-card h2 {
+  margin: 0.75rem 0 0.45rem 0;
+  font-size: 1.22rem;
+  font-weight: 700;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-top: 5rem;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+}

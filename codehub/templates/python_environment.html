@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}CodeHub - Python Environment{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <main class="main-content">
+    <div class="header-top">
+      <h2 class="page-title">Python Environment</h2>
+      <a href="{% url 'dashboard' %}" class="btn-primary btn-secondary settings-back">
+        Back
+      </a>
+    </div>
+
+    <article class="repo-card pyenv-card">
+      <div class="pyenv-head">
+        <p class="repo-desc">Write and execute Python code directly in your browser.</p>
+      </div>
+
+      <form id="code-form" class="pyenv-grid">
+        {% csrf_token %}
+
+        <section class="pyenv-panel">
+          <label for="code-editor" class="pyenv-label">Code editor</label>
+          <textarea id="code-editor" rows="16" class="pyenv-editor"
+            placeholder="print('Hello, CodeHub!')"></textarea>
+
+          <div class="pyenv-actions">
+            <button type="submit" id="run-button" class="btn-primary pyenv-run">Run code</button>
+            <button type="button" id="clear-button" class="btn-primary btn-secondary pyenv-clear">Clear</button>
+          </div>
+
+          <div id="input-section" class="pyenv-input hidden">
+            <label for="user-input" id="input-label" class="pyenv-label">Input required:</label>
+            <input type="text" id="user-input" class="pyenv-textinput" placeholder="Enter input and press Enter">
+          </div>
+        </section>
+
+        <section class="pyenv-panel">
+          <label class="pyenv-label">Output</label>
+          <pre id="output-pre" class="pyenv-output">Waiting for code...</pre>
+
+          <label class="pyenv-label pyenv-label-spaced">Image output</label>
+          <img id="output-image" alt="Plot output" class="pyenv-image" style="display:none;"/>
+        </section>
+      </form>
+    </article>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function getCsrfToken() {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+      const [name, value] = cookie.split('=').map(c => c.trim());
+      if (name === 'csrftoken') return value;
+    }
+    const input = document.querySelector('[name=csrfmiddlewaretoken]');
+    return input ? input.value : null;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const codeForm = document.getElementById('code-form');
+    const runButton = document.getElementById('run-button');
+    const clearButton = document.getElementById('clear-button');
+    const codeEditor = document.getElementById('code-editor');
+    const outputPre = document.getElementById('output-pre');
+    const outputImage = document.getElementById('output-image');
+    const inputSection = document.getElementById('input-section');
+    const inputLabel = document.getElementById('input-label');
+    const userInput = document.getElementById('user-input');
+
+    const csrfToken = getCsrfToken();
+    let currentInputs = [];
+    let currentInputIndex = 0;
+
+    codeForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      currentInputs = [];
+      currentInputIndex = 0;
+      runCode(currentInputs, currentInputIndex, false);
+    });
+
+    clearButton.addEventListener('click', clearOutput);
+
+    userInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') submitInput();
+    });
+
+    async function runCode(inputs, inputIndex, isResuming) {
+      const code = codeEditor.value;
+
+      if (!isResuming) {
+        outputPre.textContent = 'Executing...';
+        outputImage.style.display = 'none';
+      }
+
+      runButton.disabled = true;
+      runButton.textContent = 'Running...';
+      inputSection.classList.add('hidden');
+
+      try {
+        const response = await fetch("/core/api/run-code/", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+          },
+          body: JSON.stringify({ code, inputs, input_index: inputIndex })
+        });
+
+        if (!response.ok) throw new Error(`Server error: ${response.statusText}`);
+        const data = await response.json();
+
+        if (data.status === 'input_required') {
+          inputLabel.textContent = data.prompt;
+          inputSection.classList.remove('hidden');
+          userInput.focus();
+          currentInputIndex = data.next_input_index;
+          outputPre.textContent = data.output || '';
+        } else {
+          outputPre.textContent = data.output || 'No text output.';
+          inputSection.classList.add('hidden');
+        }
+
+        if (data.image) {
+          outputImage.src = `data:image/png;base64,${data.image}`;
+          outputImage.style.display = 'block';
+        } else {
+          outputImage.style.display = 'none';
+        }
+
+      } catch (error) {
+        outputPre.textContent = `Failed to connect to the server.\n\nError: ${error}`;
+      } finally {
+        runButton.disabled = false;
+        runButton.textContent = 'Run code';
+      }
+    }
+
+    function submitInput() {
+      const value = userInput.value;
+      if (value === '') return;
+      const newInputs = [...currentInputs, value];
+      userInput.value = '';
+      runCode(newInputs, currentInputIndex, true);
+    }
+
+    function clearOutput() {
+      outputPre.textContent = 'Waiting for code...';
+      outputImage.style.display = 'none';
+      inputSection.classList.add('hidden');
+      codeEditor.value = '';
+      currentInputs = [];
+      currentInputIndex = 0;
+    }
+  });
+</script>
+{% endblock %}
