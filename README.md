@@ -169,24 +169,24 @@ Codehub/ # Repo root (downloaded folder)
 
 ### 1. Clone the repository
 These steps are for someone who wants to run their **own local copy**. End‑users only need the deployed URL.
-```bash
+   ```bash
    git clone https://github.com/ronakshah22-lab/Codehub.git
    cd Codehub/codehub
 
 ### 2. Create and activate a virtual environment
-```bash
+   ```bash
    python -m venv venv
 
-Windows:
-```bash
+   Windows:
+   ```bash
    venv/Scripts/activate
 
-Linux/macOS:
-```bash
+   Linux/macOS:
+   ```bash
    source venv/bin/activate
 
 ### 3. Install dependencies
-```bash
+   ```bash
    pip install -r requirements.txt
 
 ---
@@ -196,7 +196,7 @@ Linux/macOS:
 ### Environment Variables (`.env`)
 
 Create `.env` in `codehub/` (same folder as `manage.py`) using `.env.example` as a template:
-```bash
+   ```bash
    cp .env.example .env
 
 Edit `.env` with your real values:
@@ -228,11 +228,11 @@ Codehub/codehub/firebase_credentials.json
 ## Database Setup
 
 Run migrations:
-```bash
+   ```bash
    python manage.py migrate
 
 You can create a superuser if needed:
-```bash
+   ```bash
    python manage.py createsuperuser
 
 ---
@@ -240,7 +240,7 @@ You can create a superuser if needed:
 ## Running the Development Server
 
 From `codehub/` (folder containing `manage.py`):
-```bash
+   ```bash
    python manage.py runserver
 
 
@@ -306,7 +306,7 @@ All repository and file routes are protected with `@login_required(login_url='/a
 - The backend:
   - Captures output via `contextlib.redirect_stdout`.
   - Intercepts `input()` calls via a custom `CapturingInput` context manager.
-  - Renders Matplotlib plots into an in-memory buffer and returns them as base64 PNG.[web:37][web:41]
+  - Renders Matplotlib plots into an in-memory buffer and returns them as base64 PNG.
 
 ---
 
