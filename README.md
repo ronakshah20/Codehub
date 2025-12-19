@@ -177,11 +177,11 @@ Codehub/ # Repo root (downloaded folder)
    ```bash
    python -m venv venv
 
-- Windows:
+   - Windows:
    ```bash
    venv/Scripts/activate
 
-- Linux/macOS:
+   - Linux/macOS:
    ```bash
    source venv/bin/activate
 
