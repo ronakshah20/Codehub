@@ -172,6 +172,7 @@ Codehub/ # Repo root (downloaded folder)
 ```bash
     git clone https://github.com/ronakshah22-lab/Codehub.git
     cd Codehub/codehub
+```
 ### 2. Create and activate a virtual environment
 ```bash
     python -m venv venv
