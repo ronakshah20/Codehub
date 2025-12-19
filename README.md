@@ -174,14 +174,14 @@ Codehub/ # Repo root (downloaded folder)
     cd Codehub/codehub
 
 ### 2. Create and activate a virtual environment
-       ```bash
-       python -m venv venv
+   ```bash
+   python -m venv venv
 
-   Windows:
+- Windows:
    ```bash
    venv/Scripts/activate
 
-   Linux/macOS:
+- Linux/macOS:
    ```bash
    source venv/bin/activate
 
@@ -195,7 +195,7 @@ Codehub/ # Repo root (downloaded folder)
 
 ### Environment Variables (`.env`)
 
-Create `.env` in `codehub/` (same folder as `manage.py`) using `.env.example` as a template:
+- Create `.env` in `codehub/` (same folder as `manage.py`) using `.env.example` as a template:
    ```bash
    cp .env.example .env
 
@@ -211,15 +211,13 @@ FIREBASE_APP_ID="1:...:web:..."
 EMAIL_HOST_USER="your-email@gmail.com"
 EMAIL_HOST_PASSWORD="your-gmail-app-password"
 
-`settings.py` already loads `.env` using `python-dotenv` (`dotenv.load_dotenv`), and uses these values for Firebase REST authentication and Django email backend.
+- `settings.py` already loads `.env` using `python-dotenv` (`dotenv.load_dotenv`), and uses these values for Firebase REST authentication and Django email backend.
 
 ### Firebase Admin Credentials
 
 1. In the Firebase console, create a **service account** key for Admin SDK.
 2. Download the JSON file and save it in:
-
-Codehub/codehub/firebase_credentials.json
-
+**Codehub/codehub/firebase_credentials.json**
 3. Ensure this file is **ignored** by Git (listed in `.gitignore`).
 4. Initialize Firebase Admin in your code (already present in your project via `firebase_admin.auth` usage) by pointing to this file path or environment variable.
 
@@ -227,11 +225,11 @@ Codehub/codehub/firebase_credentials.json
 
 ## Database Setup
 
-Run migrations:
+- Run migrations:
    ```bash
    python manage.py migrate
 
-You can create a superuser if needed:
+- You can create a superuser if needed:
    ```bash
    python manage.py createsuperuser
 
@@ -239,7 +237,7 @@ You can create a superuser if needed:
 
 ## Running the Development Server
 
-From `codehub/` (folder containing `manage.py`):
+- From `codehub/` (folder containing `manage.py`):
    ```bash
    python manage.py runserver
 
