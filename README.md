@@ -170,25 +170,25 @@ Codehub/ # Repo root (downloaded folder)
 ### 1. Clone the repository
 - These steps are for someone who wants to run their **own local copy**. End‑users only need the deployed URL.
 ```bash
-    git clone https://github.com/ronakshah22-lab/Codehub.git
-    cd Codehub/codehub
+git clone https://github.com/ronakshah22-lab/Codehub.git
+cd Codehub/codehub
 ```
 ### 2. Create and activate a virtual environment
 ```bash
-    python -m venv venv
-
+python -m venv venv
+```
 - Windows:
 ```bash
-    venv/Scripts/activate
-
+venv/Scripts/activate
+```
 - Linux/macOS:
-    ```bash
-    source venv/bin/activate
-
+```bash
+source venv/bin/activate
+```
 ### 3. Install dependencies
-    ```bash
-    pip install -r requirements.txt
-
+```bash
+pip install -r requirements.txt
+```
 ---
 
 ## Configuration
@@ -226,21 +226,21 @@ EMAIL_HOST_PASSWORD="your-gmail-app-password"
 ## Database Setup
 
 - Run migrations:
-   ```bash
-   python manage.py migrate
-
+```bash
+python manage.py migrate
+```
 - You can create a superuser if needed:
-   ```bash
-   python manage.py createsuperuser
-
+```bash
+python manage.py createsuperuser
+```
 ---
 
 ## Running the Development Server
 
 - From `codehub/` (folder containing `manage.py`):
-   ```bash
-   python manage.py runserver
-
+```bash
+python manage.py runserver
+```
 
 The app will be available at:
 
@@ -314,10 +314,9 @@ All repository and file routes are protected with `@login_required(login_url='/a
   - Served from `STATICFILES_DIRS = [BASE_DIR / 'static']`.
 - Production:
   - Run:
-
-    ```bash
-       python manage.py collectstatic
-
+```bash
+python manage.py collectstatic
+```
   - This collects all static files into `STATIC_ROOT = BASE_DIR / 'staticfiles'` for serving by a real web server.[web:35][web:36][web:40]
 
 ---
@@ -340,8 +339,8 @@ Use `.env.example` and `firebase_credentials.example.json` as templates to show 
 
 You currently have basic `tests.py` stubs in both `accounts` and `core`. To run tests:
 ```bash
-   python manage.py test
-
+python manage.py test
+```
 
 You can gradually add unit tests for views (e.g., auth flow, repository CRUD, Python environment API).
 
