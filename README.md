@@ -168,10 +168,10 @@ Codehub/ # Repo root (downloaded folder)
 ## Installation
 
 ### 1. Clone the repository
-       - These steps are for someone who wants to run their **own local copy**. End‑users only need the deployed URL.
-       ```bash
-       git clone https://github.com/ronakshah22-lab/Codehub.git
-       cd Codehub/codehub
+- These steps are for someone who wants to run their **own local copy**. End‑users only need the deployed URL.
+    ```bash
+    git clone https://github.com/ronakshah22-lab/Codehub.git
+    cd Codehub/codehub
 
 ### 2. Create and activate a virtual environment
        ```bash
