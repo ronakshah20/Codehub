@@ -174,20 +174,20 @@ Codehub/ # Repo root (downloaded folder)
     cd Codehub/codehub
 
 ### 2. Create and activate a virtual environment
-   ```bash
-   python -m venv venv
+    ```bash
+    python -m venv venv
 
-   - Windows:
-   ```bash
-   venv/Scripts/activate
+- Windows:
+    ```bash
+    venv/Scripts/activate
 
-   - Linux/macOS:
-   ```bash
-   source venv/bin/activate
+- Linux/macOS:
+    ```bash
+    source venv/bin/activate
 
 ### 3. Install dependencies
-   ```bash
-   pip install -r requirements.txt
+    ```bash
+    pip install -r requirements.txt
 
 ---
 
@@ -196,10 +196,10 @@ Codehub/ # Repo root (downloaded folder)
 ### Environment Variables (`.env`)
 
 - Create `.env` in `codehub/` (same folder as `manage.py`) using `.env.example` as a template:
-   ```bash
-   cp .env.example .env
+    ```bash
+    cp .env.example .env
 
-Edit `.env` with your real values:
+- Edit `.env` with your real values:
 
 FIREBASE_WEB_API_KEY="your-web-api-key"
 FIREBASE_AUTH_DOMAIN="your-project-id.firebaseapp.com"
