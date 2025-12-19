@@ -201,7 +201,7 @@ pip install -r requirements.txt
     cp .env.example .env
 
 - Edit `.env` with your real values:
-
+```text
 FIREBASE_WEB_API_KEY="your-web-api-key"
 FIREBASE_AUTH_DOMAIN="your-project-id.firebaseapp.com"
 FIREBASE_PROJECT_ID="your-project-id"
@@ -211,7 +211,7 @@ FIREBASE_APP_ID="1:...:web:..."
 
 EMAIL_HOST_USER="your-email@gmail.com"
 EMAIL_HOST_PASSWORD="your-gmail-app-password"
-
+```
 - `settings.py` already loads `.env` using `python-dotenv` (`dotenv.load_dotenv`), and uses these values for Firebase REST authentication and Django email backend.
 
 ### Firebase Admin Credentials
