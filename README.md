@@ -159,24 +159,24 @@ Codehub/ # Repo root (downloaded folder)
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/ronakshah22-lab/Codehub
-cd Codehub/codehub
+   git clone https://github.com/ronakshah22-lab/Codehub
+   cd Codehub/codehub
 
 ### 2. Create and activate a virtual environment
 ```bash
-python -m venv ../venv
+   python -m venv ../venv
 
 Windows:
 ```bash
-../venv/Scripts/activate
+   ../venv/Scripts/activate
 
 Linux/macOS:
 ```bash
-source ../venv/bin/activate
+   source ../venv/bin/activate
 
 ### 3. Install dependencies
 ```bash
-pip install -r requirements.txt
+   pip install -r requirements.txt
 
 ---
 
@@ -186,11 +186,10 @@ pip install -r requirements.txt
 
 Create `.env` in `codehub/` (same folder as `manage.py`) using `.env.example` as a template:
 ```bash
-cp .env.example .env
+   cp .env.example .env
 
 Edit `.env` with your real values:
 
-```bash
 FIREBASE_WEB_API_KEY="your-web-api-key"
 FIREBASE_AUTH_DOMAIN="your-project-id.firebaseapp.com"
 FIREBASE_PROJECT_ID="your-project-id"
@@ -201,14 +200,14 @@ FIREBASE_APP_ID="1:...:web:..."
 EMAIL_HOST_USER="your-email@gmail.com"
 EMAIL_HOST_PASSWORD="your-gmail-app-password"
 
-
 `settings.py` already loads `.env` using `python-dotenv` (`dotenv.load_dotenv`), and uses these values for Firebase REST authentication and Django email backend.
 
 ### Firebase Admin Credentials
 
 1. In the Firebase console, create a **service account** key for Admin SDK.
-2. Download the JSON file and save it as:
-codehub/firebase_credentials.json
+2. Download the JSON file and save it in:
+
+Codehub/codehub/firebase_credentials.json
 
 3. Ensure this file is **ignored** by Git (listed in `.gitignore`).
 4. Initialize Firebase Admin in your code (already present in your project via `firebase_admin.auth` usage) by pointing to this file path or environment variable.
@@ -307,9 +306,8 @@ All repository and file routes are protected with `@login_required(login_url='/a
 - Production:
   - Run:
 
-    ```
-    python manage.py collectstatic
-    ```
+    ```bash
+       python manage.py collectstatic
 
   - This collects all static files into `STATIC_ROOT = BASE_DIR / 'staticfiles'` for serving by a real web server.[web:35][web:36][web:40]
 
