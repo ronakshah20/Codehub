@@ -79,6 +79,7 @@ CodeHub is a Django-based web application that provides GitHub-like repository m
 ## Project Structure
 
 The recommended structure (matching your current layout and GitHub expectations) is:
+```text
 Codehub/ # Repo root (downloaded folder)
 │
 ├─ codehub/ # Django project directory
@@ -152,16 +153,16 @@ Codehub/ # Repo root (downloaded folder)
 │ └─ requirements.txt
 │
 └─ venv/ # Local virtualenv (not committed)
-
+```
 ---
 
 ## Technology stack
 
-- **Backend:** Django 5.x, Python 3.11+ [file:52]  
-- **Auth:** Firebase Authentication (REST + Admin SDK) [file:54]  
-- **Database (dev):** SQLite (Django default), file `db.sqlite3` [file:52]  
-- **Frontend:** HTML templates + CSS/JS static assets  
-- **Email:** SMTP (Gmail) for password reset emails [file:52]
+- **Backend:** Django 5.x, Python 3.11+
+- **Auth:** Firebase Authentication (REST + Admin SDK)
+- **Database (dev):** SQLite (Django default), file `db.sqlite3`
+- **Frontend:** HTML templates + CSS/JS static assets
+- **Email:** SMTP (Gmail) for password reset emails
 
 ---
 
