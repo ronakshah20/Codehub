@@ -169,16 +169,15 @@ Codehub/ # Repo root (downloaded folder)
 
 ### 1. Clone the repository
 - These steps are for someone who wants to run their **own local copy**. End‑users only need the deployed URL.
-    ```bash
+```bash
     git clone https://github.com/ronakshah22-lab/Codehub.git
     cd Codehub/codehub
-    ```
 ### 2. Create and activate a virtual environment
-    ```bash
+```bash
     python -m venv venv
 
 - Windows:
-    ```bash
+```bash
     venv/Scripts/activate
 
 - Linux/macOS:
