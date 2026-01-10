@@ -98,13 +98,13 @@ The platform uses **Firebase Authentication** for secure user management and **D
 | Session Engine | Signed Cookies | Built-in |
 
 ### Frontend
-| Component | Technology |
-|-----------|-----------|
+| Component | Technology | Details |
+|-----------|-----------|---------|
 | Templating | Django Templates | Jinja2 syntax |
 | Styling | CSS3 | Vanilla CSS |
 | Interactivity | Vanilla JavaScript | ES6+ |
-| HTTP Requests | Fetch API | Modern AJAX |
-| Code Editor | Textarea elements | With syntax highlighting |
+| HTTP Requests | Fetch API | AJAX requests |
+| Code Editor | Textarea elements | Plain text editor |
 
 ### External Services
 - **Firebase Authentication** - User management & authentication
@@ -237,7 +237,7 @@ Codehub/                              # Repository root
 
 ```bash
 # Clone the repository
-git clone https://github.com/ronakshah22-lab/Codehub.git
+git clone https://github.com/ronakshah20/Codehub.git
 cd Codehub/codehub
 ```
 
