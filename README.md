@@ -237,8 +237,8 @@ Codehub/                              # Repository root
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/codehub.git
-cd codehub
+git clone https://github.com/ronakshah22-lab/Codehub.git
+cd Codehub/codehub
 ```
 
 ### 2. Create Virtual Environment

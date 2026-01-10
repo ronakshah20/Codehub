@@ -24,12 +24,12 @@ dotenv.load_dotenv(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y7d8@6um1+^5ru2x)re_4gg7dk5)v&_=r7w7foe-0l31!*%qkt'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -136,6 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Session management
 # We'll use sessions to know if the user is logged in
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+#Session Security
+SESSION_COOKIE_SECURE = True            # Only send over HTTPS
+SESSION_COOKIE_HTTPONLY = True          # Prevent JavaScript access
+SESSION_COOKIE_SAMESITE = 'Strict'      # CSRF protection
 # --- EMAIL CONFIGURATION FOR PASSWORD RESET ---
 # This setup is for Gmail.
 # IMPORTANT: You MUST add EMAIL_HOST_USER and EMAIL_HOST_PASSWORD to your .env file
