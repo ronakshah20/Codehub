@@ -318,7 +318,6 @@ EMAIL_HOST_PASSWORD="your-app-password"  # NOT your Gmail password!
 1. Go to **Project Settings** → **Service Accounts**
 2. Click **"Generate New Private Key"**
 3. Save the downloaded JSON as `firebase_credentials.json` in the project root
-4. **IMPORTANT**: This file contains secret keys - NEVER commit it to Git!
 
 #### Step 5: Initialize Firebase Admin SDK
 ```bash
