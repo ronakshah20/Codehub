@@ -1,4 +1,4 @@
-# CodeHub
+# CodeHub - Cloud-Based Repository & Python Environment Platform
 
 ## 📋 Table of Contents
 
